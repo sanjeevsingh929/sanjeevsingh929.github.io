@@ -22,6 +22,41 @@ var margin = {top: 100, right: 100, bottom: 100, left:100},
     width = 1024 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
+//Tooltip
+var tooltip = d3.select("#my_dataviz")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "1px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+
+
+
+  // A function that change this tooltip when the user hover a point.
+  // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
+  var mouseover = function(d) {
+    tooltip
+      .style("opacity", 1)
+  }
+
+  var mousemove = function(d) {
+    tooltip
+      .html(d.CarName)
+      .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+
+  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+  var mouseleave = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
@@ -79,6 +114,9 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       .attr("stroke", function(d){ return myColor("valueA") })
         .style("stroke-width", 4)
         .style("fill", "none")
+        .on("mouseover", mouseover )
+    .on("mousemove", mousemove )
+    .on("mouseleave", mouseleave )
     
 
 
@@ -119,6 +157,9 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       .attr("stroke", function(d){ return myColor(selectedGroup) })
       .style("stroke-width", 4)
       .style("fill", "none")
+      .on("mouseover", mouseover )
+    .on("mousemove", mousemove )
+    .on("mouseleave", mouseleave )
           
     }
 
