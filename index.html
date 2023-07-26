@@ -32,10 +32,10 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
+d3.csv("/data/cars_24_combined.csv", function(data) {
 
     // List of groups (here I have one group per column)
-    var allGroup = d3.map(data, function(d){return(d.name)}).keys()
+    var allGroup = d3.map(data, function(d){return(d.Fuel)}).keys()
 
     // add the options to the button
     d3.select("#selectButton")
@@ -53,7 +53,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return d.year; }))
+      .domain(d3.extent(data, function(d) { return d.Year; }))
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -61,7 +61,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.n; })])
+      .domain([0, d3.max(data, function(d) { return +d.Price; })])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
@@ -72,8 +72,8 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .append("path")
         .datum(data.filter(function(d){return d.name==allGroup[0]}))
         .attr("d", d3.line()
-          .x(function(d) { return x(d.year) })
-          .y(function(d) { return y(+d.n) })
+          .x(function(d) { return x(d.Fuel) })
+          .y(function(d) { return y(+d.Price) })
         )
         .attr("stroke", function(d){ return myColor("valueA") })
         .style("stroke-width", 4)
@@ -91,8 +91,8 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
           .transition()
           .duration(1000)
           .attr("d", d3.line()
-            .x(function(d) { return x(d.year) })
-            .y(function(d) { return y(+d.n) })
+            .x(function(d) { return x(d.Fuel) })
+            .y(function(d) { return y(+d.Price) })
           )
           .attr("stroke", function(d){ return myColor(selectedGroup) })
     }
