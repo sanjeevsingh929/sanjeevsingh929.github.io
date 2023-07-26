@@ -67,17 +67,17 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       .call(d3.axisLeft(y));
 
     // Initialize line with first group of the list
-    var line = svg.append('g')
+
+    var line=svg.append('g')
     .selectAll("dot")
-    .datum(data.filter(function(d){return d.Fuel==allGroup[0]}))
+    .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.Year); } )
+      .attr("cx", function (d) { return x(+d.Year); } )
       .attr("cy", function (d) { return y(+d.Price); } )
       .attr("r", 1.5)
-      .attr("stroke", function(d){ return myColor("valueA") })
-      .style("stroke-width", 4)
-      .style("fill", "none")
+      .style("fill", "#69b3a2")
+    
 
 
 
@@ -89,7 +89,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
 
       // Give these new data to update line
       line
-          .datum(dataFilter)
+          .data(dataFilter)
           .transition()
           .duration(1000)
           .attr("cx", function (d) { return x(d.Year); } )
