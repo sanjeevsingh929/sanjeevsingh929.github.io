@@ -68,7 +68,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
 
     // Initialize line with first group of the list
 
-    var circle=svg.append('g')
+    svg.append('g')
     .selectAll("dot")
     .data(data.filter(function(d){return d.Fuel==allGroup[0]}))
     .enter()
@@ -88,8 +88,11 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
 
       // Give these new data to update line
-      circle
-          .datum(dataFilter)
+      svg.append('g')
+    .selectAll("dot")
+          .data(dataFilter)
+          .enter()
+    .append("circle")
           .attr("cx", function (d) { return x(d.Year); } )
       .attr("cy", function (d) { return y(+d.Price); } )
       .attr("r", 1.5)
