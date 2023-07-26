@@ -90,8 +90,6 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       // Give these new data to update line
       circle
           .data(dataFilter)
-          .transition()
-          .duration(1000)
           .attr("cx", function (d) { return x(d.Year); } )
       .attr("cy", function (d) { return y(+d.Price); } )
       .attr("r", 1.5)
