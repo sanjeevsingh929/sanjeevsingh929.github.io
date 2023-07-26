@@ -53,7 +53,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
 
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return d.Year; }))
+      .domain(d3.extent(data, function(d) { return +d.Year; }))
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -72,7 +72,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       .append("path")
         .datum(data.filter(function(d){return d.Fuel==allGroup[0]}))
         .attr("d", d3.line()
-          .x(function(d) { return x(d.Year) })
+          .x(function(d) { return x(+d.Year) })
           .y(function(d) { return y(+d.Price) })
         )
         .attr("stroke", function(d){ return myColor("valueA") })
@@ -91,7 +91,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
           .transition()
           .duration(1000)
           .attr("d", d3.line()
-            .x(function(d) { return x(d.Year) })
+            .x(function(d) { return x(+d.Year) })
             .y(function(d) { return y(+d.Price) })
           )
           .attr("stroke", function(d){ return myColor(selectedGroup) })
