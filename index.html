@@ -70,9 +70,9 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
     var line = svg
       .append('g')
       .append("path")
-        .datum(data.filter(function(d){return d.name==allGroup[0]}))
+        .datum(data.filter(function(d){return d.Fuel==allGroup[0]}))
         .attr("d", d3.line()
-          .x(function(d) { return x(d.Fuel) })
+          .x(function(d) { return x(d.Year) })
           .y(function(d) { return y(+d.Price) })
         )
         .attr("stroke", function(d){ return myColor("valueA") })
@@ -83,7 +83,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.name==selectedGroup})
+      var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
 
       // Give these new data to update line
       line
@@ -91,7 +91,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
           .transition()
           .duration(1000)
           .attr("d", d3.line()
-            .x(function(d) { return x(d.Fuel) })
+            .x(function(d) { return x(d.Year) })
             .y(function(d) { return y(+d.Price) })
           )
           .attr("stroke", function(d){ return myColor(selectedGroup) })
