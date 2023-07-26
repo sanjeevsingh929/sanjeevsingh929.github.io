@@ -87,6 +87,9 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
 
+      //clear the old value
+      svg.selectAll("*").remove();
+
       // Give these new data to update line
       svg.append('g')
     .selectAll("dot")
