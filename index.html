@@ -90,6 +90,21 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       //clear the old value
       d3.selectAll('svg > g > *').remove();
 
+        // Add X axis --> it is a date format
+    var x = d3.scaleLinear()
+      .domain(d3.extent(data, function(d) { return +d.Year; }))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return +d.Price; })])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
       // Give these new data to update line
       svg.append('g')
     .selectAll("dot")
