@@ -75,7 +75,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
   // group the data: I want to draw one line per group
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
     .key(function(d) { return d.CarName;})
-    .entries(data.filter(function(d){return d.Fuel==allGroup[0]}));
+    .entries(data);
 
 
 
