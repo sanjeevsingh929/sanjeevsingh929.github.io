@@ -71,8 +71,8 @@ var res = sumstat.map(function(d){ return d.key }) // list of group names
   var color = d3.scaleOrdinal()
     .domain(res)
     .range(schemeSet2);
-
-
+console.log(res)
+console.log(sumstat)
 
   // Draw the line
   svg.selectAll(".line")
