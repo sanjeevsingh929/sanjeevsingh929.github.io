@@ -111,7 +111,7 @@ var tooltip = d3.select("#my_dataviz")
 
   var clickEvent = function(d) {
     console.log(d)
-    update(selectedGroup,carName="Datsun Go")
+    update(d.Fuel,carName=d.carName)
   }
 
     // Initialize line with first group of the list
