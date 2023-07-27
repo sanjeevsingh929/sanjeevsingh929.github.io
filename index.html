@@ -53,6 +53,11 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
       .domain(allGroup)
       .range(d3.schemeSet2);
 
+    //Acolor scale for each car
+    var color = d3.scaleOrdinal()
+    .domain(d3.extent(data, function(d) { return +d.CarName; }))
+    .range(d3.schemeSet2);
+
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
       .domain(d3.extent(data, function(d) { return +d.Year-1; }))
@@ -114,7 +119,7 @@ var tooltip = d3.select("#my_dataviz")
       .attr("cx", function (d) { return x(+d.Year); } )
       .attr("cy", function (d) { return y(+d.Price); } )
       .attr("r", 1.5)
-      .attr("stroke", function(d){ return myColor("valueA") })
+      .attr("stroke", function(d){ return color(d.CarName) })
         .style("stroke-width", 4)
         .style("fill", "none")
         .on("mouseover", mouseover )
@@ -157,7 +162,7 @@ var tooltip = d3.select("#my_dataviz")
           .attr("cx", function (d) { return x(d.Year); } )
       .attr("cy", function (d) { return y(+d.Price); } )
       .attr("r", 1.5)
-      .attr("stroke", function(d){ return myColor(selectedGroup) })
+      .attr("stroke", function(d){ return color(d.CarName) })
       .style("stroke-width", 4)
       .style("fill", "none")
       .on("mouseover", mouseover )
