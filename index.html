@@ -137,14 +137,14 @@ var tooltip = d3.select("#my_dataviz")
 
     // A function that update the chart
     function update(selectedGroup,carName="Nothing") {
-
+        console.log("Inside update"+selectedGroup+carName)
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
 
       if(carName!="Nothing"){
         dataFilter = data.filter(function(d){return d.CarName==carName})
       }
-
+      console.log(dataFilter)
       //clear the old value
       d3.selectAll('svg > g > *').remove();
 
