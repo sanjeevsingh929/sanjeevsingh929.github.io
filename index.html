@@ -70,8 +70,8 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
 
 
     //Tooltip
-var tooltip = d3.select(".tooltip-area")
-
+var tooltip = d3.select("#my_dataviz")
+    .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
     .style("background-color", "white")
