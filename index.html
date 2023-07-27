@@ -70,7 +70,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
 var res = sumstat.map(function(d){ return d.key }) // list of group names
   var color = d3.scaleOrdinal()
     .domain(res)
-    .range(schemeSet2);
+    .range(d3.schemeSet2);
 console.log(res)
 console.log(sumstat)
 
