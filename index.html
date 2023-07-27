@@ -56,7 +56,7 @@ d3.csv("/data/cars_24_combined.csv", function(data) {
     //Acolor scale for each car
     var color = d3.scaleOrdinal()
     .domain(d3.extent(data, function(d) { return +d.CarName; }))
-    .range(d3.schemeSet2);
+    .range(d3.schemeSet3);
 
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
@@ -109,6 +109,11 @@ var tooltip = d3.select("#my_dataviz")
       .style("opacity", 0)
   }
 
+  var clickEvent = function(d) {
+    console.log(d)
+    update(selectedGroup,carName="Datsun Go")
+  }
+
     // Initialize line with first group of the list
 
     svg.append('g')
@@ -125,15 +130,20 @@ var tooltip = d3.select("#my_dataviz")
         .on("mouseover", mouseover )
     .on("mousemove", mousemove )
     .on("mouseleave", mouseleave )
+    .on("click", clickEvent )
     
 
 
 
     // A function that update the chart
-    function update(selectedGroup) {
+    function update(selectedGroup,carName="Nothing") {
 
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
+
+      if(carName!="Nothing"){
+        dataFilter = data.filter(function(d){return d.CarName==carName})
+      }
 
       //clear the old value
       d3.selectAll('svg > g > *').remove();
