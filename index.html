@@ -21,7 +21,7 @@
     
       <div class="row">
     <div class="col-md-4">
-      <button type="button"class="btn btn-flat" onclick="goToDiv(); clearElements()">Impact of Year</button>
+      <button type="button"class="btn btn-flat" onclick="goToDiv();">Impact of Year</button>
     </div>
     <div class="col-md-4">
       <button type="button" class="btn btn-flat" onclick="goToDiv1()">Impact of Diastance</button>
@@ -50,14 +50,15 @@
 
 <script>
 
-function clearElements() {
-  d3.select("my_dataviz").html = "" 
-}
+
 function goToDiv() {
+  var elements = document.getElementById("my_dataviz");
+  while (elements.firstChild) {
+    elements.removeChild(elements.firstChild);
+  }
 
 
-
-  d3.select("my_dataviz").html = "" 
+  
 // set the dimensions and margins of the graph
 var margin = {top: 100, right: 100, bottom: 100, left:100},
     width = 1024 - margin.left - margin.right,
