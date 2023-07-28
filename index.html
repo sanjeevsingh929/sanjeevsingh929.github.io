@@ -16,24 +16,25 @@
 
       <h1>Impact of Year,Distance and Type on Car Prices </h1>
       <hr></hr>
-      <div class="row justify-content-center" style="background-color: #ADD8E6;">
+      <div class="row justify-content-center" >
 
     
-      <div class="row">
-    <div class="col-md-4">
-      <button type="button"class="btn btn-flat" onclick="goToDiv();">Impact of Year</button>
+    <div class="row">
+    <div class="col-md-4" style="background-color: #ADD8E6;">
+      <button type="button"class="btn btn-flat" onclick="goToDiv();" >Impact of Year</button>
     </div>
-    <div class="col-md-4">
-      <button type="button" class="btn btn-flat" onclick="goToDiv1()">Impact of Diastance</button>
+    <div class="col-md-4" style="background-color: #ADD8E6;">
+      <button type="button" class="btn btn-flat" onclick="goToDiv()">Impact of Distance</button>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="background-color: #ADD8E6;">
       <button type="button" class="btn btn-flat" onclick="goToDiv()">Impact of Type</button>
     </div>
   </div>
+    <div id="my_dataviz"></div>
+  </div>
+  </div>
   
-  <div id="my_dataviz"></div>
-  <div id="my_dataviz1"></div>
-  <div id="my_dataviz2"></div>
+
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
@@ -41,8 +42,7 @@
 <!-- Initialize a select button -->
 <select id="selectButton"></select>
 
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+
 
 <!-- Color Scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
