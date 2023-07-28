@@ -51,10 +51,7 @@
 <script>
 
 function clearElements() {
-  var elements = document.getElementById("my_dataviz");
-  while (elements.firstChild) {
-    elements.removeChild(elements.firstChild);
-  }
+  d3.select("my_dataviz").html = "" 
 }
 function goToDiv() {
 
