@@ -49,14 +49,16 @@
 
 
 <script>
-function goToDiv() {
 
-  function clearElements() {
+function clearElements() {
   var elements = document.getElementById("div");
   while (elements.firstChild) {
     elements.removeChild(elements.firstChild);
   }
 }
+function goToDiv() {
+
+
 
   d3.select("my_dataviz").html = "" 
 // set the dimensions and margins of the graph
