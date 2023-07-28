@@ -56,7 +56,10 @@ function goToDiv() {
   while (elements.firstChild) {
     elements.removeChild(elements.firstChild);
   }
-
+  var elements = document.getElementById("#selectButton");
+  while (elements.firstChild) {
+    elements.removeChild(elements.firstChild);
+  }
 
   
 // set the dimensions and margins of the graph
@@ -64,7 +67,20 @@ var margin = {top: 100, right: 100, bottom: 100, left:100},
     width = 1024 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
+//Read the data
+d3.csv("/data/cars_24_combined.csv", function(data) {
 
+// List of groups (here I have one group per column)
+var allGroup = d3.map(data, function(d){return(d.Fuel)}).keys()
+
+// add the options to the button
+d3.select("#selectButton")
+  .selectAll('myOptions')
+   .data(allGroup)
+  .enter()
+  .append('option')
+  .text(function (d) { return d; }) // text showed in the menu
+  .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -75,20 +91,7 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
-d3.csv("/data/cars_24_combined.csv", function(data) {
 
-    // List of groups (here I have one group per column)
-    var allGroup = d3.map(data, function(d){return(d.Fuel)}).keys()
-
-    // add the options to the button
-    d3.select("#selectButton")
-      .selectAll('myOptions')
-     	.data(allGroup)
-      .enter()
-    	.append('option')
-      .text(function (d) { return d; }) // text showed in the menu
-      .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
     // A color scale: one color for each group
     var myColor = d3.scaleOrdinal()
