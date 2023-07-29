@@ -185,25 +185,15 @@ var tooltip = d3.select("#my_dataviz")
   }
 
   //Add Annotations
-  const annotations = [
-  {
-    note: {
-      label: "Here is the annotation label",
-      title: "Annotation title"
-    },
-    connector: {
-      end: "dot",        // Can be none, or arrow or dot
-      type: "line",      // ?? don't know what it does
-      lineType : "vertical",    // ?? don't know what it does
-      endScale: 10     // dot size
-    },
-    color: ["grey"],
-    x: 40,
-    y: 160,
-    dy: 70,
-    dx: 70
-  }
-]
+  const annotations = data.map(function(d) {
+    return {
+      x: +d.Year,
+      y: +d.Price,
+      text: `This is the annotation for ${d.CarName}`,
+    };
+  });
+
+  console.log(annotations)
 
 // Add annotation to the chart
 const type = d3.annotationCustomType(
