@@ -67,7 +67,7 @@ function goToDiv() {
 
   
 // set the dimensions and margins of the graph
-var margin = {top: 100, right: 50, bottom: 100, left:100},
+var margin = {top: 100, right: 100, bottom: 100, left:100},
     width = 1024 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
@@ -207,8 +207,8 @@ var tooltip = d3.select("#my_dataviz")
     color: ["blue"],
           data: { x:years , y: maxPrice},
           className: "show-bg",
-          dx:50,
-          dy:50
+          dx:40,
+          dy:40
         }]
 
   console.log(annotations)
