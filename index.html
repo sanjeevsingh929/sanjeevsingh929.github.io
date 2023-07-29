@@ -292,6 +292,46 @@ svg.append("text")
     .attr("x", -margin.top)
     .text("Price")
 
+
+  //Add Annotations
+  
+  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
+  const years = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Year
+
+  console.log(maxPrice)
+  console.log(years)
+
+  const annotations = [
+     
+        {
+          note: {
+    label: "Costliest car in selected category",
+    bgPadding: 20,
+    
+  },
+    connector: {
+      end: "arrow",        // none, or arrow or dot
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
+    },
+    color: ["blue"],
+          data: { x:years , y: maxPrice}
+        }]
+
+  console.log(annotations)
+
+// Add annotation to the chart
+
+
+      const makeAnnotations = d3.annotation()
+        
+        .accessors({ 
+          x: function(d){ return x(d.x)},
+          y: function(d){ return y(d.y) }
+        })
+        .annotations(annotations)
+
       // Give these new data to update line
       svg.append('g')
     .selectAll("dot")
@@ -308,6 +348,9 @@ svg.append("text")
     .on("mousemove", mousemove )
     .on("mouseleave", mouseleave )
     .on("click", clickEvent )
+
+    svg.append("g")
+  .call(makeAnnotations)
           
     }
 
