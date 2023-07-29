@@ -200,12 +200,6 @@ var tooltip = d3.select("#my_dataviz")
     bgPadding: 20,
     
   },
-    connector: {
-      end: "arrow",        // none, or arrow or dot
-      type: "curve",       // Line or curve
-      points: 3,           // Number of break in the curve
-      lineType : "horizontal"
-    },
     color: ["blue"],
           data: { x:years , y: maxPrice},
           className: "show-bg",
@@ -743,7 +737,7 @@ var svg = d3.select("#my_dataviz")
     
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain([0,1,2,3])
+      .domain([0,4])
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
