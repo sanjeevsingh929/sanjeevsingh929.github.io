@@ -128,10 +128,10 @@ var svg = d3.select("#my_dataviz")
 
     // Add X axis label:
 svg.append("text")
-    .attr("text-anchor", "middle")
+    .attr("text-anchor", "start")
     .attr("x", width)
-    .attr("y", height + margin.top )
-    .text("X axis title");
+    .attr("y", height + margin.top -10)
+    .text("Year");
 
 // Y axis label:
 svg.append("text")
