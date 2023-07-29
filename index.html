@@ -740,7 +740,7 @@ var svg = d3.select("#my_dataviz")
     
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return +d.Owner; }))
+      .domain([0,1,2,3])
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -759,7 +759,7 @@ var svg = d3.select("#my_dataviz")
     .attr("text-anchor", "start")
     .attr("x", width-150)
     .attr("y", height + margin.top -30)
-    .text("Type------>");
+    .text("Owner------>");
 
 // Y axis label:
 svg.append("text")
