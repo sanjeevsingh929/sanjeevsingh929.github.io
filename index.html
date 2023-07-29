@@ -257,13 +257,13 @@ var tooltip = d3.select("#my_dataviz")
       var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
 
       if(carName!="Nothing"){
-        dataFilter = data.filter(function(d){return d.CarName==carName})
+        dataFilter = dataFilter.filter(function(d){return d.CarName==carName})
       }
       if(drive!="Nothing"){
-        dataFilter = data.filter(function(d){return d.Drive==drive})
+        dataFilter = dataFilter.filter(function(d){return d.Drive==drive})
       }
       if(type!="Nothing"){
-        dataFilter = data.filter(function(d){return d.Type==type})
+        dataFilter = dataFilter.filter(function(d){return d.Type==type})
       }
       console.log(dataFilter)
       //clear the old value
