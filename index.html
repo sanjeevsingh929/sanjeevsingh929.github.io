@@ -201,9 +201,11 @@ var tooltip = d3.select("#my_dataviz")
     
     
   },
-    connector: {
+  connector: {
       end: "arrow",        // none, or arrow or dot
-
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
     },
     color: ["blue"],
           data: { x:years , y: maxPrice},
