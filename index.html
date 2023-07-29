@@ -196,7 +196,7 @@ var tooltip = d3.select("#my_dataviz")
      
         {
           note: {
-    label: "Costliest car",
+    label: "Costliest car in selected category",
     bgPadding: 20,
     
   },
@@ -207,7 +207,7 @@ var tooltip = d3.select("#my_dataviz")
       lineType : "horizontal"
     },
     color: ["blue"],
-          data: { x:2022 , y: 1402000}
+          data: { x:$years , y: $maxPrice}
         }]
 
   console.log(annotations)
