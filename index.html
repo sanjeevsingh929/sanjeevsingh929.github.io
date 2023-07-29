@@ -181,7 +181,7 @@ var tooltip = d3.select("#my_dataviz")
 
   var clickEvent = function(d) {
     console.log(d)
-    update(d.Fuel,d.CarName)
+    update(d.Fuel,d.CarName,d.Drive,d.Type)
   }
 
   //Add Annotations
@@ -251,13 +251,19 @@ var tooltip = d3.select("#my_dataviz")
 
 
     // A function that update the chart
-    function update(selectedGroup,carName="Nothing") {
+    function update(selectedGroup,carName="Nothing",drive="Nothing",type="Nothing") {
         console.log("Inside update"+selectedGroup+carName)
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
 
       if(carName!="Nothing"){
         dataFilter = data.filter(function(d){return d.CarName==carName})
+      }
+      if(drive!="Nothing"){
+        dataFilter = data.filter(function(d){return d.Drive==drive})
+      }
+      if(type!="Nothing"){
+        dataFilter = data.filter(function(d){return d.Type==type})
       }
       console.log(dataFilter)
       //clear the old value
@@ -481,7 +487,7 @@ var tooltip = d3.select("#my_dataviz")
 
   var mousemove = function(d) {
     tooltip
-      .html(d.CarName)
+    .html(d.CarName+" "+d.Drive+" "+d.Type)
       .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
       .style("top", (d3.mouse(this)[1]) + "px")
   }
@@ -793,7 +799,7 @@ var tooltip = d3.select("#my_dataviz")
 
   var mousemove = function(d) {
     tooltip
-      .html(d.CarName)
+    .html(d.CarName+" "+d.Drive+" "+d.Type)
       .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
       .style("top", (d3.mouse(this)[1]) + "px")
   }
