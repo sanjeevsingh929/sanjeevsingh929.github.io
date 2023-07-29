@@ -185,13 +185,20 @@ var tooltip = d3.select("#my_dataviz")
   }
 
   //Add Annotations
+  var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
+  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
+  var years=dataFilter[dataFilter.Price==maxPrice]
+
+  console.log(maxPrice)
+  console.log(years)
+
   const annotations = [
      
         {
           note: {
-    label: "Longer text to show text wrapping",
+    label: "Costliest car",
     bgPadding: 20,
-    title: "Annotations :)"
+    
   },
     connector: {
       end: "arrow",        // none, or arrow or dot
@@ -199,17 +206,14 @@ var tooltip = d3.select("#my_dataviz")
       points: 3,           // Number of break in the curve
       lineType : "horizontal"
     },
-    color: ["purple"],
-          data: { x: 2022, y: 1402000}
+    color: ["blue"],
+          data: { x:2022 , y: 1402000}
         }]
 
   console.log(annotations)
 
 // Add annotation to the chart
-const type = d3.annotationCustomType(
-        d3.annotationBadge, 
-        {"subject":{"radius": 10 }}
-      )
+
 
       const makeAnnotations = d3.annotation()
         
