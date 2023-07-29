@@ -188,10 +188,14 @@ var tooltip = d3.select("#my_dataviz")
   const annotations = [
      
         {
-          subject: {
-            text: "This is my annotation",
-            x: "right" //badges have an x of "left" or "right"
-          },
+          note: {
+      label: "Here is the annotation label",
+      title: "Annotation title",
+      align: "middle",  // try right or left
+      wrap: 200,  // try something smaller to see text split in several lines
+      padding: 10   // More = text lower
+    },
+    color: ["#69b3a2"],
           data: { x: 2022, y: 1402000}
         }]
 
@@ -204,7 +208,7 @@ const type = d3.annotationCustomType(
       )
 
       const makeAnnotations = d3.annotation()
-        .type(type)
+        
         .accessors({ 
           x: function(d){ return x(d.x)},
           y: function(d){ return y(d.y) }
