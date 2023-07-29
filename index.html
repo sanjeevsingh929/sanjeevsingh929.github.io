@@ -187,7 +187,7 @@ var tooltip = d3.select("#my_dataviz")
   //Add Annotations
   var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
   var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-  var years=dataFilter[dataFilter.Price==maxPrice]
+  const years = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Year
 
   console.log(maxPrice)
   console.log(years)
