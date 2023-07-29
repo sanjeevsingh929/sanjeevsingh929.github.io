@@ -133,7 +133,7 @@ svg.append("text")
     .attr("text-anchor", "start")
     .attr("x", width-150)
     .attr("y", height + margin.top -30)
-    .text("Year");
+    .text("Year------>");
 
 // Y axis label:
 svg.append("text")
@@ -141,7 +141,7 @@ svg.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", -margin.left+20)
     .attr("x", -margin.top)
-    .text("Price")
+    .text("Price------>")
 
 
     //Tooltip
@@ -282,7 +282,7 @@ svg.append("text")
     .attr("text-anchor", "start")
     .attr("x", width-150)
     .attr("y", height + margin.top -30)
-    .text("Year");
+    .text("Year------>");
 
 // Y axis label:
 svg.append("text")
@@ -290,7 +290,7 @@ svg.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", -margin.left+20)
     .attr("x", -margin.top)
-    .text("Price")
+    .text("Price------>")
 
 
   //Add Annotations
@@ -652,6 +652,317 @@ svg.append("text")
           .enter()
     .append("circle")
           .attr("cx", function (d) { return x(d.Distance); } )
+      .attr("cy", function (d) { return y(+d.Price); } )
+      .attr("r", 1.5)
+      .attr("stroke", function(d){ return color(d.CarName) })
+      .style("stroke-width", 4)
+      .style("fill", "none")
+      .on("mouseover", mouseover )
+    .on("mousemove", mousemove )
+    .on("mouseleave", mouseleave )
+    .on("click", clickEvent )
+
+    svg.append("g")
+  .call(makeAnnotations)
+          
+    }
+
+    // When the button is changed, run the updateChart function
+    d3.select("#selectButton").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value")
+        // run the updateChart function with this selected option
+        update(selectedOption)
+    })
+
+})
+
+}
+
+
+function goToType() {
+  var elements = document.getElementById("my_dataviz");
+  while (elements.firstChild) {
+    elements.removeChild(elements.firstChild);
+  }
+
+  var elements = document.getElementById("selectButton");
+  while (elements.firstChild) {
+    elements.removeChild(elements.firstChild);
+  }
+
+  
+// set the dimensions and margins of the graph
+var margin = {top: 100, right: 150, bottom: 100, left:100},
+    width = 1024 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+//Read the data
+d3.csv("/data/cars_24_combined.csv", function(data) {
+
+// List of groups (here I have one group per column)
+var allGroup = d3.map(data, function(d){return(d.Fuel)}).keys()
+
+// add the options to the button
+d3.select("#selectButton")
+  .selectAll('myOptions')
+   .data(allGroup)
+  .enter()
+  .append('option')
+  .text(function (d) { return d; }) // text showed in the menu
+  .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+    // A color scale: one color for each group
+    var myColor = d3.scaleOrdinal()
+      .domain(allGroup)
+      .range(d3.schemeSet2);
+
+    //Acolor scale for each car
+    var color = d3.scaleOrdinal()
+    .domain(d3.extent(data, function(d) { return +d.CarName; }))
+    .range(d3.schemeSet3);
+
+    
+    
+    
+    
+    
+    // Add X axis --> it is a date format
+    var x = d3.scaleLinear()
+      .domain(d3.extent(data, function(d) { return +d.Type; }))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return +d.Price; })])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+
+    // Add X axis label:
+    svg.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", width-150)
+    .attr("y", height + margin.top -30)
+    .text("Type------>");
+
+// Y axis label:
+svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left+20)
+    .attr("x", -margin.top)
+    .text("Price------>")
+
+
+    //Tooltip
+var tooltip = d3.select("#my_dataviz")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "1px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+
+
+
+  // A function that change this tooltip when the user hover a point.
+  // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
+  var mouseover = function(d) {
+    tooltip
+      .style("opacity", 1)
+  }
+
+  var mousemove = function(d) {
+    tooltip
+      .html(d.CarName)
+      .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+
+  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+  var mouseleave = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+
+  var clickEvent = function(d) {
+    console.log(d)
+    update(d.Fuel,d.CarName)
+  }
+
+  //Add Annotations
+  var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
+  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
+  const type = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Type
+
+
+
+  const annotations = [
+     
+        {
+          note: {
+    label: "Costliest car in selected category",
+    bgPadding: 20,
+    
+  },
+    connector: {
+      end: "arrow",        // none, or arrow or dot
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
+    },
+    color: ["blue"],
+          data: { x:type , y: maxPrice}
+        }]
+
+  console.log(annotations)
+
+// Add annotation to the chart
+
+
+      const makeAnnotations = d3.annotation()
+        
+        .accessors({ 
+          x: function(d){ return x(d.x)},
+          y: function(d){ return y(d.y) }
+        })
+        .annotations(annotations)
+
+
+    // Initialize line with first group of the list
+
+    svg.append('g')
+    .selectAll("dot")
+    .data(data.filter(function(d){return d.Fuel==allGroup[0]}))
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(+d.Type); } )
+      .attr("cy", function (d) { return y(+d.Price); } )
+      .attr("r", 1.5)
+      .attr("stroke", function(d){ return color(d.CarName) })
+        .style("stroke-width", 4)
+        .style("fill", "none")
+        .on("mouseover", mouseover )
+        
+    .on("mousemove", mousemove )
+    .on("mouseleave", mouseleave )
+    .on("click", clickEvent )
+    
+
+    svg.append("g")
+  .call(makeAnnotations)
+
+
+
+    // A function that update the chart
+    function update(selectedGroup,carName="Nothing") {
+        console.log("Inside update"+selectedGroup+carName)
+      // Create new data with the selection?
+      var dataFilter = data.filter(function(d){return d.Fuel==selectedGroup})
+
+      if(carName!="Nothing"){
+        dataFilter = data.filter(function(d){return d.CarName==carName})
+      }
+      console.log(dataFilter)
+      //clear the old value
+      d3.selectAll('svg > g > *').remove();
+
+        // Add X axis --> it is a date format
+    var x = d3.scaleLinear()
+      .domain(d3.extent(data, function(d) { return +d.Type; }))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return +d.Price; })])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+          // Add X axis label:
+svg.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", width-150)
+    .attr("y", height + margin.top -30)
+    .text("Type------>");
+
+// Y axis label:
+svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left+20)
+    .attr("x", -margin.top)
+    .text("Price------>")
+
+
+  //Add Annotations
+  
+  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
+  const type = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Type
+
+
+
+  const annotations = [
+     
+        {
+          note: {
+    label: "Costliest car in selected category",
+    bgPadding: 20,
+    
+  },
+    connector: {
+      end: "arrow",        // none, or arrow or dot
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
+    },
+    color: ["blue"],
+          data: { x:type , y: maxPrice}
+        }]
+
+  console.log(annotations)
+
+// Add annotation to the chart
+
+
+      const makeAnnotations = d3.annotation()
+        
+        .accessors({ 
+          x: function(d){ return x(d.x)},
+          y: function(d){ return y(d.y) }
+        })
+        .annotations(annotations)
+
+      // Give these new data to update line
+      svg.append('g')
+    .selectAll("dot")
+          .data(dataFilter)
+          .enter()
+    .append("circle")
+          .attr("cx", function (d) { return x(d.Type); } )
       .attr("cy", function (d) { return y(+d.Price); } )
       .attr("r", 1.5)
       .attr("stroke", function(d){ return color(d.CarName) })
