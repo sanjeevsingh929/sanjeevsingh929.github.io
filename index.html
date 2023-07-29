@@ -105,6 +105,11 @@ var svg = d3.select("#my_dataviz")
     .domain(d3.extent(data, function(d) { return +d.CarName; }))
     .range(d3.schemeSet3);
 
+    
+    
+    
+    
+    
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
       .domain(d3.extent(data, function(d) { return +d.Year-1; }))
@@ -119,6 +124,22 @@ var svg = d3.select("#my_dataviz")
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
+
+
+    // Add X axis label:
+svg.append("text")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + margin.top + 20)
+    .text("X axis title");
+
+// Y axis label:
+svg.append("text")
+    .attr("text-anchor", "end")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left+20)
+    .attr("x", -margin.top)
+    .text("Y axis title")
 
 
     //Tooltip
