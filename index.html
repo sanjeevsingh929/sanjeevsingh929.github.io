@@ -206,7 +206,19 @@ var tooltip = d3.select("#my_dataviz")
 ]
 
 // Add annotation to the chart
-const makeAnnotations = d3.annotation().annotations(annotations)
+const type = d3.annotationCustomType(
+        d3.annotationBadge, 
+        {"subject":{"radius": 10 }}
+      )
+
+
+const makeAnnotations = d3.annotation()
+        .type(type)
+        .accessors({ 
+          x: function(d){ return x(+d.Year);},
+          y: function(d){ return y(+d.Price); }
+        })
+        .annotations(annotations)
 
 
     // Initialize line with first group of the list
