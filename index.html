@@ -222,13 +222,14 @@ const makeAnnotations = d3.annotation()
         .style("stroke-width", 4)
         .style("fill", "none")
         .on("mouseover", mouseover )
-        .call(makeAnnotations)
+        
     .on("mousemove", mousemove )
     .on("mouseleave", mouseleave )
     .on("click", clickEvent )
     
 
-    
+    svg.append("g")
+  .call(makeAnnotations)
 
 
 
