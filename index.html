@@ -890,7 +890,7 @@ var tooltip = d3.select("#my_dataviz")
 
         // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return +d.Owner; }))
+      .domain([0,4])
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
