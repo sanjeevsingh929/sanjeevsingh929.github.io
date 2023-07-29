@@ -19,7 +19,7 @@
       <div class="row justify-content-center" >
 
     
-    <div class="row" onload="goToDiv();">
+    <div class="row" >
     <div class="col-md-4" style="background-color: #ADD8E6;">
       <button type="button"class="btn btn-flat" onclick="goToDiv();" >Impact of Year</button>
     </div>
@@ -50,7 +50,7 @@
 
 
 <script>
-
+window.onload = goToDiv();
 
 function goToDiv() {
   var elements = document.getElementById("my_dataviz");
