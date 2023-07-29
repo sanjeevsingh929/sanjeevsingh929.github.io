@@ -187,9 +187,9 @@ var tooltip = d3.select("#my_dataviz")
   //Add Annotations
   const annotations = data.map(function(d) {
     return {
+      note: { label: `This is the annotation for ${d.CarName}` },
       x: +d.Year,
       y: +d.Price,
-      text: `This is the annotation for ${d.CarName}`,
       dx: 10,
       dy: 10,
 
@@ -199,17 +199,13 @@ var tooltip = d3.select("#my_dataviz")
   console.log(annotations)
 
 // Add annotation to the chart
-const type = d3.annotationCustomType(
-        d3.annotationBadge, 
-        {"subject":{"radius": 10 }}
-      )
+const type = d3.annotationLabel
 
 
 const makeAnnotations = d3.annotation()
-.text(function(d) { return d.text; })
-    .position(function(d) { return [d.x, d.y]; })
-    .dx(function(d) { return d.dx; })
-    .dy(function(d) { return d.dy; });
+.notePadding(15)
+  .type(type)
+  .annotations(annotations);
 
 
     // Initialize line with first group of the list
