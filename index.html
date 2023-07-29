@@ -129,8 +129,8 @@ var svg = d3.select("#my_dataviz")
     // Add X axis label:
 svg.append("text")
     .attr("text-anchor", "start")
-    .attr("x", width-120)
-    .attr("y", height + margin.top -70)
+    .attr("x", width-150)
+    .attr("y", height + margin.top -30)
     .text("Year");
 
 // Y axis label:
@@ -230,6 +230,21 @@ var tooltip = d3.select("#my_dataviz")
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
+
+          // Add X axis label:
+svg.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", width-150)
+    .attr("y", height + margin.top -30)
+    .text("Year");
+
+// Y axis label:
+svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left+20)
+    .attr("x", -margin.top)
+    .text("Price")
 
       // Give these new data to update line
       svg.append('g')
