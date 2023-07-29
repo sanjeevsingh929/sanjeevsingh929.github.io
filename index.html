@@ -190,6 +190,9 @@ var tooltip = d3.select("#my_dataviz")
       x: +d.Year,
       y: +d.Price,
       text: `This is the annotation for ${d.CarName}`,
+      dx: 10,
+      dy: 10,
+
     };
   });
 
@@ -203,12 +206,10 @@ const type = d3.annotationCustomType(
 
 
 const makeAnnotations = d3.annotation()
-        .type(type)
-        .accessors({ 
-          x: function(d){ return x(+d.Year);},
-          y: function(d){ return y(+d.Price); }
-        })
-        .annotations(annotations)
+.text(function(d) { return d.text; })
+    .position(function(d) { return [d.x, d.y]; })
+    .dx(function(d) { return d.dx; })
+    .dy(function(d) { return d.dy; });
 
 
     // Initialize line with first group of the list
