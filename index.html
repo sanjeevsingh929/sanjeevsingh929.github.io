@@ -190,12 +190,17 @@ var tooltip = d3.select("#my_dataviz")
         {
           note: {
       label: "Here is the annotation label",
-      title: "Annotation title",
-      align: "middle",  // try right or left
+      align: "right",  // try right or left
       wrap: 200,  // try something smaller to see text split in several lines
       padding: 10   // More = text lower
     },
-    color: ["#69b3a2"],
+    connector: {
+      end: "arrow",        // none, or arrow or dot
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
+    },
+    color: ["purple"],
           data: { x: 2022, y: 1402000}
         }]
 
