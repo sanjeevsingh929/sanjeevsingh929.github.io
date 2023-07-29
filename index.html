@@ -203,9 +203,6 @@ const type = d3.annotationLabel
 
 
 const makeAnnotations = d3.annotation()
-.notePadding(15)
-  .type(type)
-  .annotations(annotations);
 
 
     // Initialize line with first group of the list
@@ -228,8 +225,7 @@ const makeAnnotations = d3.annotation()
     .on("click", clickEvent )
     
 
-    svg.append("g")
-  .call(makeAnnotations)
+
 
 
 
