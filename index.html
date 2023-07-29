@@ -204,8 +204,7 @@ var tooltip = d3.select("#my_dataviz")
 ]
 
 // Add annotation to the chart
-const makeAnnotations = d3.annotation()
-  .annotations(annotations)
+const makeAnnotations = d3.annotation().annotations(annotations)
 
 
     // Initialize line with first group of the list
