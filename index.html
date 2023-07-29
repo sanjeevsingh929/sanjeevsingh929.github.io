@@ -182,6 +182,32 @@ var tooltip = d3.select("#my_dataviz")
     update(d.Fuel,d.CarName)
   }
 
+  //Add Annotations
+  const annotations = [
+  {
+    note: {
+      label: "Here is the annotation label",
+      title: "Annotation title"
+    },
+    connector: {
+      end: "dot",        // Can be none, or arrow or dot
+      type: "line",      // ?? don't know what it does
+      lineType : "vertical",    // ?? don't know what it does
+      endScale: 10     // dot size
+    },
+    color: ["grey"],
+    x: 40,
+    y: 160,
+    dy: 70,
+    dx: 70
+  }
+]
+
+// Add annotation to the chart
+const makeAnnotations = d3.annotation()
+  .annotations(annotations)
+
+
     // Initialize line with first group of the list
 
     svg.append('g')
@@ -196,9 +222,12 @@ var tooltip = d3.select("#my_dataviz")
         .style("stroke-width", 4)
         .style("fill", "none")
         .on("mouseover", mouseover )
+        .call(makeAnnotations)
     .on("mousemove", mousemove )
     .on("mouseleave", mouseleave )
     .on("click", clickEvent )
+    
+
     
 
 
