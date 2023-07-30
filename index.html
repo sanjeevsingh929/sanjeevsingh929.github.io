@@ -529,37 +529,48 @@ var tooltip = d3.select("#my_dataviz")
 
   //Add Annotations
   var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
-  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-  const distance = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Distance
+const maxdistance = d3.max(dataFilter, function(d) { return +d.Distance; })
+var maxdistance_maxPrice=d3.max(dataFilter.filter(function(d){return d.Distance==maxdistance}), function(d) { return +d.Price; })
+mylabel="Steady decline in price with distance"
 
-  console.log(maxPrice)
-  console.log(distance)
+var other_distance=dataFilter.filter(function(d){return d.Distance!=maxdistance})
+var otherdistance_maxPrice=d3.max(other_distance, function(d) { return +d.Price; })
+
+if(otherdistance_maxPrice<maxdistance_maxPrice)
+{
+  mylabel="There has been increase in price"
+}
+
+
+  console.log(maxdistance_maxPrice)
+  console.log(maxdistance)
 
   const annotations = [
      
         {
           note: {
-    label: "Costliest car in selected category",
-    wrap:10
+    label: mylabel,
+    wrap:50
     
     
   },
   connector: {
       end: "arrow",        // none, or arrow or dot
-      type: "curve",       // Line or curve
-      points: 3,           // Number of break in the curve
+      
       lineType : "horizontal"
     },
     color: ["blue"],
-          data: { x:distance , y: maxPrice},
+          data: { x:maxdistance , y: maxdistance_maxPrice},
           className: "show-bg",
           dx:40,
           dy:40
         }]
 
+  console.log(annotations)
+
   
 
-  console.log(annotations)
+
 
 // Add annotation to the chart
 
@@ -650,29 +661,39 @@ svg.append("text")
 
   //Add Annotations
   
-  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-  const distance = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Distance
 
-  console.log(maxPrice)
-  console.log(distance)
+const maxdistance = d3.max(dataFilter, function(d) { return +d.Distance; })
+var maxdistance_maxPrice=d3.max(dataFilter.filter(function(d){return d.Distance==maxdistance}), function(d) { return +d.Price; })
+mylabel="Steady decline in price with distance"
+
+var other_distance=dataFilter.filter(function(d){return d.Distance!=maxdistance})
+var otherdistance_maxPrice=d3.max(other_distance, function(d) { return +d.Price; })
+
+if(otherdistance_maxPrice<maxdistance_maxPrice)
+{
+  mylabel="There has been increase in price"
+}
+
+
+  console.log(maxdistance_maxPrice)
+  console.log(maxdistance)
 
   const annotations = [
      
         {
           note: {
-    label: "Costliest car in selected category",
-    wrap:10
+    label: mylabel,
+    wrap:50
     
     
   },
   connector: {
       end: "arrow",        // none, or arrow or dot
-      type: "curve",       // Line or curve
-      points: 3,           // Number of break in the curve
+      
       lineType : "horizontal"
     },
     color: ["blue"],
-          data: { x:distance , y: maxPrice},
+          data: { x:maxdistance , y: maxdistance_maxPrice},
           className: "show-bg",
           dx:40,
           dy:40
