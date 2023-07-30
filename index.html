@@ -186,8 +186,10 @@ var tooltip = d3.select("#my_dataviz")
 
   //Add Annotations
   var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
-  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-  const years = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Year
+  //var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
+//const years = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Year
+const years = d3.max(dataFilter, function(d) { return +d.Year; })
+var maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==years}), function(d) { return +d.Price; })
 
   console.log(maxPrice)
   console.log(years)
@@ -196,15 +198,14 @@ var tooltip = d3.select("#my_dataviz")
      
         {
           note: {
-    label: "Costliest car in selected category",
-    wrap:10
+    label: "Steady increase in price",
+    wrap:50
     
     
   },
   connector: {
       end: "arrow",        // none, or arrow or dot
-      type: "curve",       // Line or curve
-      points: 3,           // Number of break in the curve
+      
       lineType : "horizontal"
     },
     color: ["blue"],
