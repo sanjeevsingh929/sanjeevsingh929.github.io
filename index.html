@@ -193,7 +193,7 @@ var tooltip = d3.select("#my_dataviz")
 var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
 const maxyear = d3.max(dataFilter, function(d) { return +d.Year; })
 var maxyear_maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==maxyear}), function(d) { return +d.Price; })
-mylabel="Steady increase in price"
+mylabel="Increase in price with year"
 
 var other_year=dataFilter.filter(function(d){return d.Year!=maxyear})
 var otheryear_maxPrice=d3.max(other_year, function(d) { return +d.Price; })
@@ -321,7 +321,7 @@ svg.append("text")
   
   const maxyear = d3.max(dataFilter, function(d) { return +d.Year; })
 var maxyear_maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==maxyear}), function(d) { return +d.Price; })
-mylabel="Steady increase in price"
+mylabel="Increase in price with year"
 
 var other_year=dataFilter.filter(function(d){return d.Year!=maxyear})
 var otheryear_maxPrice=d3.max(other_year, function(d) { return +d.Price; })
@@ -536,7 +536,7 @@ var tooltip = d3.select("#my_dataviz")
   var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
 const maxdistance = d3.max(dataFilter, function(d) { return +d.Distance; })
 var maxdistance_maxPrice=d3.max(dataFilter.filter(function(d){return d.Distance==maxdistance}), function(d) { return +d.Price; })
-mylabel="Steady decline in price with distance"
+mylabel="Decline in price with distance"
 
 var other_distance=dataFilter.filter(function(d){return d.Distance!=maxdistance})
 var otherdistance_maxPrice=d3.max(other_distance, function(d) { return +d.Price; })
@@ -669,7 +669,7 @@ svg.append("text")
 
 const maxdistance = d3.max(dataFilter, function(d) { return +d.Distance; })
 var maxdistance_maxPrice=d3.max(dataFilter.filter(function(d){return d.Distance==maxdistance}), function(d) { return +d.Price; })
-mylabel="Steady decline in price with distance"
+mylabel="Decline in price with distance"
 
 var other_distance=dataFilter.filter(function(d){return d.Distance!=maxdistance})
 var otherdistance_maxPrice=d3.max(other_distance, function(d) { return +d.Price; })
