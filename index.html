@@ -524,17 +524,24 @@ var tooltip = d3.select("#my_dataviz")
         {
           note: {
     label: "Costliest car in selected category",
-    bgPadding: 20,
+    wrap:10
+    
     
   },
-    connector: {
-      end: "arrow",     
+  connector: {
+      end: "arrow",        // none, or arrow or dot
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
     },
     color: ["blue"],
           data: { x:distance , y: maxPrice},
-          dx:20,
-          dx:20
+          className: "show-bg",
+          dx:40,
+          dy:40
         }]
+
+  
 
   console.log(annotations)
 
@@ -638,17 +645,21 @@ svg.append("text")
         {
           note: {
     label: "Costliest car in selected category",
-    bgPadding: 20,
+    wrap:10
+    
     
   },
-    connector: {
+  connector: {
       end: "arrow",        // none, or arrow or dot
-      
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
     },
     color: ["blue"],
           data: { x:distance , y: maxPrice},
-          dx:20,
-          dy:20
+          className: "show-bg",
+          dx:40,
+          dy:40
         }]
 
   console.log(annotations)
@@ -834,25 +845,29 @@ var tooltip = d3.select("#my_dataviz")
   var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
   const owner = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Owner
 
-
-
   const annotations = [
      
-        {
-          note: {
-    label: "Costliest car in selected category",
+     {
+       note: {
+ label: "Costliest car in selected category",
+ wrap:10
+ 
+ 
+},
+connector: {
+   end: "arrow",        // none, or arrow or dot
+   type: "curve",       // Line or curve
+   points: 3,           // Number of break in the curve
+   lineType : "horizontal"
+ },
+ color: ["blue"],
+       data: { x:owner , y: maxPrice},
+       className: "show-bg",
+       dx:40,
+       dy:40
+     }]
 
-    
-  },
-    connector: {
-      end: "arrow",        // none, or arrow or dot
-      
-    },
-    color: ["blue"],
-          data: { x:owner , y: maxPrice},
-          dx:20,
-          dy:20
-        }]
+  
 
   console.log(annotations)
 
@@ -952,21 +967,25 @@ svg.append("text")
 
   const annotations = [
      
-        {
-          note: {
-    label: "Costliest car in selected category",
-
-    
-  },
-    connector: {
-      end: "arrow",        // none, or arrow or dot
-
-    },
-    color: ["blue"],
-          data: { x:owner , y: maxPrice},dx:20,dy:20
-        }]
-
-  console.log(annotations)
+     {
+       note: {
+ label: "Costliest car in selected category",
+ wrap:10
+ 
+ 
+},
+connector: {
+   end: "arrow",        // none, or arrow or dot
+   type: "curve",       // Line or curve
+   points: 3,           // Number of break in the curve
+   lineType : "horizontal"
+ },
+ color: ["blue"],
+       data: { x:owner , y: maxPrice},
+       className: "show-bg",
+       dx:40,
+       dy:40
+     }]
 
 // Add annotation to the chart
 
