@@ -190,6 +190,7 @@ var tooltip = d3.select("#my_dataviz")
 //const years = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Year
 const years = d3.max(dataFilter, function(d) { return +d.Year; })
 var maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==years}), function(d) { return +d.Price; })
+mylabel="Steady increase in price"
 
   console.log(maxPrice)
   console.log(years)
@@ -198,7 +199,7 @@ var maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==years}), functi
      
         {
           note: {
-    label: "Steady increase in price",
+    label: mylabel,
     wrap:50
     
     
