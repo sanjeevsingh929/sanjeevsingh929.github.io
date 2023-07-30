@@ -185,12 +185,19 @@ var tooltip = d3.select("#my_dataviz")
   }
 
   //Add Annotations
-  var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
-  //var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-//const years = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Year
-const years = d3.max(dataFilter, function(d) { return +d.Year; })
-var maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==years}), function(d) { return +d.Price; })
+var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
+const maxyear = d3.max(dataFilter, function(d) { return +d.Year; })
+var maxyear_maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==years}), function(d) { return +d.Price; })
 mylabel="Steady increase in price"
+
+var other_year=dataFilter.filter(function(d){return d.Year!=years})
+var otheryear_maxPrice=d3.max(other_year, function(d) { return +d.Price; })
+
+if(otheryear_maxPrice>maxyear_maxPrice)
+{
+  mylabel="There has been decrease in price"
+}
+
 
   console.log(maxPrice)
   console.log(years)
@@ -210,7 +217,7 @@ mylabel="Steady increase in price"
       lineType : "horizontal"
     },
     color: ["blue"],
-          data: { x:years , y: maxPrice},
+          data: { x:maxyear , y: maxyear_maxPrice},
           className: "show-bg",
           dx:40,
           dy:40
@@ -307,8 +314,18 @@ svg.append("text")
 
   //Add Annotations
   
-  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-  const years = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Year
+  const maxyear = d3.max(dataFilter, function(d) { return +d.Year; })
+var maxyear_maxPrice=d3.max(dataFilter.filter(function(d){return d.Year==years}), function(d) { return +d.Price; })
+mylabel="Steady increase in price"
+
+var other_year=dataFilter.filter(function(d){return d.Year!=years})
+var otheryear_maxPrice=d3.max(other_year, function(d) { return +d.Price; })
+
+if(otheryear_maxPrice>maxyear_maxPrice)
+{
+  mylabel="There has been decrease in price"
+}
+
 
   console.log(maxPrice)
   console.log(years)
@@ -317,25 +334,22 @@ svg.append("text")
      
         {
           note: {
-    label: "Costliest car in selected category",
-    wrap:10
+    label: mylabel,
+    wrap:50
     
     
   },
   connector: {
       end: "arrow",        // none, or arrow or dot
-      type: "curve",       // Line or curve
-      points: 3,           // Number of break in the curve
+      
       lineType : "horizontal"
     },
     color: ["blue"],
-          data: { x:years , y: maxPrice},
+          data: { x:maxyear , y: maxyear_maxPrice},
           className: "show-bg",
           dx:40,
           dy:40
         }]
-
-  console.log(annotations)
 
 // Add annotation to the chart
 
