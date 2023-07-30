@@ -274,7 +274,7 @@ var tooltip = d3.select("#my_dataviz")
 
         // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return +d.Year-1; }))
+     .domain([2009,2023])
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -316,18 +316,21 @@ svg.append("text")
         {
           note: {
     label: "Costliest car in selected category",
+    wrap:10
     
     
   },
-    connector: {
+  connector: {
       end: "arrow",        // none, or arrow or dot
-
+      type: "curve",       // Line or curve
+      points: 3,           // Number of break in the curve
+      lineType : "horizontal"
     },
     color: ["blue"],
           data: { x:years , y: maxPrice},
           className: "show-bg",
-          dx:20,
-          dy:20
+          dx:40,
+          dy:40
         }]
 
   console.log(annotations)
