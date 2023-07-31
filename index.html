@@ -884,32 +884,42 @@ var tooltip = d3.select("#my_dataviz")
 
   //Add Annotations
   var dataFilter = data.filter(function(d){return d.Fuel==allGroup[0]})
-  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-  const owner = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Owner
+const maxowner = d3.max(dataFilter, function(d) { return +d.Owner; })
+var maxowner_maxPrice=d3.max(dataFilter.filter(function(d){return d.Owner==maxowner}), function(d) { return +d.Price; })
+mylabel="Decline in price with owner"
+
+var other_owner=dataFilter.filter(function(d){return d.Owner!=maxowner})
+var otherowner_maxPrice=d3.max(other_owner, function(d) { return +d.Price; })
+
+if(otherowner_maxPrice<maxowner_maxPrice)
+{
+  mylabel="There has been increase in price"
+}
+
+
+  console.log(maxowner_maxPrice)
+  console.log(maxowner)
 
   const annotations = [
      
-     {
-       note: {
- label: "Costliest car in selected category",
- wrap:10
- 
- 
-},
-connector: {
-   end: "arrow",        // none, or arrow or dot
-   type: "curve",       // Line or curve
-   points: 3,           // Number of break in the curve
-   lineType : "horizontal"
- },
- color: ["blue"],
-       data: { x:owner , y: maxPrice},
-       className: "show-bg",
-       dx:40,
-       dy:40
-     }]
-
-  
+        {
+          note: {
+    label: mylabel,
+    wrap:50
+    
+    
+  },
+  connector: {
+      end: "arrow",        // none, or arrow or dot
+      
+      lineType : "horizontal"
+    },
+    color: ["blue"],
+          data: { x:maxowner , y: maxowner_maxPrice},
+          className: "show-bg",
+          dx:40,
+          dy:40
+        }]
 
   console.log(annotations)
 
@@ -1002,32 +1012,45 @@ svg.append("text")
 
   //Add Annotations
   
-  var maxPrice=d3.max(dataFilter, function(d) { return +d.Price; })
-  const owner = dataFilter.filter(function(d){return d.Price==maxPrice})[0].Owner
+
+const maxowner = d3.max(dataFilter, function(d) { return +d.Owner; })
+var maxowner_maxPrice=d3.max(dataFilter.filter(function(d){return d.Owner==maxowner}), function(d) { return +d.Price; })
+mylabel="Decline in price with owner"
+
+var other_owner=dataFilter.filter(function(d){return d.Owner!=maxowner})
+var otherowner_maxPrice=d3.max(other_owner, function(d) { return +d.Price; })
+
+if(otherowner_maxPrice<maxowner_maxPrice)
+{
+  mylabel="There has been increase in price"
+}
 
 
+  console.log(maxowner_maxPrice)
+  console.log(maxowner)
 
   const annotations = [
      
-     {
-       note: {
- label: "Costliest car in selected category",
- wrap:10
- 
- 
-},
-connector: {
-   end: "arrow",        // none, or arrow or dot
-   type: "curve",       // Line or curve
-   points: 3,           // Number of break in the curve
-   lineType : "horizontal"
- },
- color: ["blue"],
-       data: { x:owner , y: maxPrice},
-       className: "show-bg",
-       dx:40,
-       dy:40
-     }]
+        {
+          note: {
+    label: mylabel,
+    wrap:50
+    
+    
+  },
+  connector: {
+      end: "arrow",        // none, or arrow or dot
+      
+      lineType : "horizontal"
+    },
+    color: ["blue"],
+          data: { x:maxowner , y: maxowner_maxPrice},
+          className: "show-bg",
+          dx:40,
+          dy:40
+        }]
+
+  console.log(annotations)
 
 // Add annotation to the chart
 
